@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Hold Shift</title>
+</head>
+
+<body>
+  <style>
+    html {
+      font-family: sans-serif;
+      background: #ffc600;
+    }
+
+    .inbox {
+      max-width: 400px;
+      margin: 50px auto;
+      background: white;
+      border-radius: 5px;
+      box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .item {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #f1f1f1;
+    }
+
+    .item:last-child {
+      border-bottom: 0;
+    }
+
+    input:checked+p {
+      background: #f9f9f9;
+      text-decoration: line-through;
+    }
+
+    input[type="checkbox"] {
+      margin: 20px;
+    }
+
+    p {
+      margin: 0;
+      padding: 20px;
+      transition: background 0.2s;
+      flex: 1;
+      font-family: 20px;
+      font-weight: 200;
+      border-left: 1px solid #d1e2ff;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+  <div>
+    <h1 class="header">DC Comics - Rebirth</h1>
+    <h2 class="header">Reading Order</h2>
+  </div>
+  <div class="inbox">
+    <div class="item">
+      <input type="checkbox">
+      <p>DC Universe - Rebirth</p>
+    </div>
+    <div class="item">
+      <input type="checkbox">
+      <p>Doomed To Repeat It</p>
+    </div>
+    <div class="item">
+      <input type="checkbox">
+      <p>Nightwing - Rebirth</p>
+    </div>
+    <div class="item">
+      <input type="checkbox">
+      <p>Titans - Rebirth</p>
+    </div>
+    <div class="item">
+      <input type="checkbox">
+      <p>The Return Of Wally West</p>
+    </div>
+    <div class="item">
+      <input type="checkbox">
+      <p>Lightning Strikes Twice</p>
+    </div>
+    <div class="item">
+      <input type="checkbox">
+      <p>The Final Days of Superman</p>
+    </div>
+    <div class="item">
+      <input type="checkbox">
+      <p>Lois and Clark</p>
+    </div>
+    <div class="item">
+      <input type="checkbox">
+      <p>Superman Rebirth</p>
+    </div>
+    <div class="item">
+      <input type="checkbox">
+      <p>Path of Doom</p>
+    </div>
+  </div>
+  <script>
+    const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+
+    let lastChecked;
+
+    function handleCheck(e) {
+      // Check if the shift key was pressed
+      // and check that user is checking only
+      let inBetween = false;
+      if (e.shiftKey && this.checked) {
+        //go ahead
+        // loop over every single checkbox
+        checkboxes.forEach(checkbox => {
+          console.log(checkbox);
+          if (checkbox === this || checkbox === lastChecked) {
+            inBetween = !inBetween;
+            console.log('Starting to check them inbetween!');
+          }
+          if (inBetween) {
+            checkbox.checked = true;
+          }
+        });
+
+      }
+      lastChecked = this;
+    }
+
+    checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
+  </script>
+
+</body>
+
+</html>
